@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>{{ student.username }}</h2>
+<br>
+<p>
+        <a href="{% url 'mainpage' student.id %}">Back to main page</a>
+    </p>
+<br><br><br>
+<h3>{{ note }}</h3>
+<br>
+ <form enctype="multipart/form-data" action="{% url 'addmusic' student.id %}" method="post">
+        {% csrf_token %}
+     <table>{{ newSongform.as_table }}</table>
+        <input type="submit" value="Add" name="add">
+    </form>
+</body>
+</html>

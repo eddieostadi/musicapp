@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>{{ student.username }}</h2>
+<br>
+<p>
+        <a href="{% url 'home' %}">Logout</a>
+    </p>
+<br><br><br>
+        <a href="{% url 'addmusic' student.id %}">Add a new song</a>
+<br><br><br>
+
+<div>
+        {% if songs.all %}
+        <h3>Your Subscriptions</h3>
+    <ul>
+    {% for song in songs.all %}
+        <li><p><br> Title: {{ song.title }}<br> Artist: {{song.artist}}<br> Year: {{song.year}}</p>
+            <img height=125 width=125 src="{{song.image.url}}">
+        </li>
+
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+</div>
+<h3>Looking For your favorite song?</h3>
+<h4>Search here</h4>
+ <form enctype="multipart/form-data" action="{% url 'mainpage' student.id %}" method="post">
+        {% csrf_token %}
+     <table>{{ query.as_table }}</table>
+        <input type="submit" value="Search" name="search">
+    </form>
+
+    {% if qresult.all %}
+        <p> Results:</p>
+        <br>
+        <ul>
+            {% for result in qresult.all %}
+                <li><p>Title : {{ result.title }} <br> Artist: {{ result.artist }} <br> Year: {{ result.year }} <br>
+                    {% if result.image %}
+                    <img height=125 width=125 src="{{result.image.url}}">
+                    <a href="{% url 'subscribe' student.id result.id %}">Subscribe</a></p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+<h3>{{ note }}</h3>
+</body>
+</html>

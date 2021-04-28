@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <img src="{% static 'rmit.png' %}"> </img>
+    <h2>This is a music subscription platform for RMIT students</h2>
+    <h2>Login is required</h2>
+
+</head>
+<body>
+<h3>{{note}}</h3>
+    {% if form.errors %}
+         <p>Invalid username or password. Please try again.</p>
+    {% endif %}
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        {{ userid }}
+        <input type="submit" value="Login" name="Login">
+    </form>
+    <p><a href="{% url 'signup' %}">Register here!</a></p>
+
+</body>
+</html>

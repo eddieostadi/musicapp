@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>{{ student.username }}</h2>
+<h3>{{ note }}</h3>
+
+
+<form enctype="multipart/form-data" action="{% url 'subscribe' student.id song.id %}" method="post">
+        {% csrf_token %}
+            <p>{{song.title}}</p>
+            <img height=125 width=125 src="{{song.image.url}}">
+        <input type="submit" value="Subscribe" name="Subscribe">
+    </form>
+<p>
+        <a href="{% url 'mainpage' student.id %}">Back to main page</a>
+    </p>
+</body>
+</html>
